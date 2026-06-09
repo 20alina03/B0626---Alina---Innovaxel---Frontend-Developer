@@ -1,44 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 font-sans;
+    @apply bg-white text-gray-900 antialiased selection:bg-sky-100 selection:text-sky-700;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(120deg, #ffffff 0%, #f8fafc 35%, #eef2ff 100%);
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 }
 
 @layer components {
+  /* Buttons */
   .btn-primary {
-    @apply bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2;
+    @apply bg-gray-900 hover:bg-gray-700 text-white font-semibold px-4 py-2.5 rounded-lg transition-all duration-150 flex items-center gap-2 cursor-pointer text-sm shadow-sm active:scale-[0.98];
   }
   .btn-secondary {
-    @apply bg-[#1e3050] hover:bg-[#2d4a72] text-slate-300 font-medium px-4 py-2 rounded-lg border border-[#1e3050] transition-all duration-200 flex items-center gap-2;
+    @apply bg-white hover:bg-gray-50 text-gray-700 font-medium px-4 py-2.5 rounded-lg border border-gray-200 transition-all duration-150 flex items-center gap-2 cursor-pointer text-sm;
   }
   .btn-danger {
-    @apply bg-red-500/10 hover:bg-red-500/20 text-red-400 font-medium px-3 py-1.5 rounded-lg transition-all duration-200;
+    @apply bg-red-50 hover:bg-red-100 text-red-600 font-medium px-3.5 py-2 rounded-md transition-all duration-150 cursor-pointer border border-red-100 text-sm inline-flex items-center gap-2 transform hover:scale-105 hover:-translate-y-1;
   }
   .btn-edit {
-    @apply bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium px-3 py-1.5 rounded-lg transition-all duration-200;
+    @apply bg-sky-50 hover:bg-sky-100 text-sky-600 font-medium px-3.5 py-2 rounded-md transition-all duration-150 cursor-pointer border border-sky-100 text-sm inline-flex items-center gap-2 transform hover:scale-105 hover:-translate-y-1;
   }
   .btn-ghost {
-    @apply bg-transparent hover:bg-[#1e3050] text-slate-400 hover:text-white font-medium px-3 py-2 rounded-lg border border-[#1e3050] transition-all duration-200 flex items-center gap-2;
+    @apply bg-transparent hover:bg-gray-100 text-gray-500 hover:text-gray-700 font-medium px-4 py-2.5 rounded-lg border border-gray-200 transition-all duration-150 flex items-center gap-2 cursor-pointer text-sm;
   }
-  .input-dark {
-    @apply w-full bg-[#0a1628] border border-[#1e3050] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200;
+
+  /* Form Elements */
+  .input-dark, .input-field {
+    @apply w-full bg-white border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all duration-150;
   }
-  .input-field {
-    @apply w-full border border-slate-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 bg-[#0a1628] text-white;
+
+  select.input-dark, select.input-field {
+    @apply appearance-none;
   }
-  .form-label {
-    @apply block text-xs font-medium text-slate-400 mb-1.5;
+
+  .form-label, .label {
+    @apply block text-xs font-semibold text-gray-500 tracking-wide uppercase mb-1.5;
   }
-  .label {
-    @apply block text-sm font-medium text-slate-400 mb-1;
-  }
+
   .card {
-    @apply bg-[#0f1929] rounded-xl border border-[#1e3050] p-6;
+    @apply bg-white border border-gray-100 rounded-xl p-6 shadow-sm;
   }
+
   .error-text {
-    @apply text-red-400 text-xs mt-1;
+    @apply text-red-500 text-xs font-medium mt-1.5;
   }
+}
+
+/* Decorative animated background blobs */
+html, body {
+  height: 100%;
+}
+
+.bg-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-blobs::before,
+.bg-blobs::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(36px) saturate(120%);
+  opacity: 0.9;
+  transform: translate3d(0,0,0);
+  mix-blend-mode: screen;
+}
+
+.bg-blobs::before {
+  width: 720px;
+  height: 720px;
+  left: -200px;
+  top: -140px;
+  background: radial-gradient(circle at 30% 30%, rgba(236,72,153,0.36), rgba(236,72,153,0.12) 40%, transparent 60%);
+  animation: float-blob 9s ease-in-out infinite alternate;
+}
+
+.bg-blobs::after {
+  width: 860px;
+  height: 860px;
+  right: -220px;
+  bottom: -180px;
+  background: radial-gradient(circle at 70% 70%, rgba(96,165,250,0.26), rgba(96,165,250,0.08) 40%, transparent 60%);
+  animation: float-blob 11s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float-blob {
+  0% { transform: translateY(0) scale(1); opacity: 0.55 }
+  100% { transform: translateY(-18px) scale(1.05); opacity: 0.45 }
+}
+
+/* Ensure content sits above decorative blobs */
+main, .card, .btn-primary, .btn-secondary, .btn-ghost, header, footer, .bg-white {
+  position: relative;
+  z-index: 1;
 }

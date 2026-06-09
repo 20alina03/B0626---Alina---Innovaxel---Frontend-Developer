@@ -13,28 +13,28 @@ const ExpenseCard = ({ expense, onEdit, onDelete }: ExpenseCardProps) => {
   const color = CATEGORY_COLORS[expense.category] || "#6B7280";
 
   return (
-    <div className="bg-white border border-gray-100 rounded-xl p-4 hover:border-gray-300 transition-all duration-150 shadow-sm group">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3 min-w-0">
+    <div className="bg-white border border-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:border-gray-300 transition-all duration-150 shadow-sm group">
+      <div className="flex items-start justify-between gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           {/* Color dot */}
           <div
             className="w-2.5 h-2.5 rounded-full shrink-0 mt-1"
             style={{ backgroundColor: color }}
           />
           <div className="min-w-0">
-            <p className="font-semibold text-gray-900 text-sm leading-snug truncate">
+            <p className="font-semibold text-gray-900 text-xs sm:text-sm leading-snug truncate">
               {expense.title}
             </p>
             <p className="text-xs text-gray-400 mt-0.5">{formatDate(expense.date)}</p>
           </div>
         </div>
 
-        <span className="text-sm font-bold text-gray-900 shrink-0">
+        <span className="text-xs sm:text-sm font-bold text-gray-900 shrink-0 tabular-nums">
           {formatCurrency(expense.amount)}
         </span>
       </div>
 
-      <div className="mt-3 flex items-center justify-between">
+      <div className="mt-2 sm:mt-3 flex items-center justify-between gap-2">
         <span
           className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border"
           style={{
@@ -46,20 +46,20 @@ const ExpenseCard = ({ expense, onEdit, onDelete }: ExpenseCardProps) => {
           {expense.category}
         </span>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-1.5 sm:gap-2 items-center">
           <button
             onClick={() => onEdit(expense)}
-            className="btn-edit"
+            className="btn-edit text-xs px-2 sm:px-3 py-1 sm:py-1.5"
             title="Edit"
           >
-            <Pencil size={14} /> <span className="ml-1.5">Edit</span>
+            <Pencil size={12} /> <span className="hidden sm:inline">Edit</span>
           </button>
           <button
             onClick={() => onDelete(expense.id)}
-            className="btn-danger"
+            className="btn-danger text-xs px-2 sm:px-3 py-1 sm:py-1.5"
             title="Delete"
           >
-            <Trash2 size={14} /> <span className="ml-1.5">Delete</span>
+            <Trash2 size={12} /> <span className="hidden sm:inline">Delete</span>
           </button>
         </div>
       </div>

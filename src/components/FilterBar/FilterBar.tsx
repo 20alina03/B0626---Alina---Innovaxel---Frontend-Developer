@@ -19,34 +19,34 @@ const FilterBar = ({ filters, onChange }: FilterBarProps) => {
     filters.search || filters.category || filters.dateFrom || filters.dateTo;
 
   return (
-    <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
-      <div className="flex flex-wrap gap-3 items-end">
+    <div className="bg-white border border-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+      <div className="flex flex-wrap gap-2 sm:gap-3 items-end">
         {/* Label */}
-        <div className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider self-center mr-1">
+        <div className="hidden md:flex items-center gap-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider self-center mr-1">
           <SlidersHorizontal size={13} />
           Filters
         </div>
 
         {/* Search */}
-        <div className="flex-1 min-w-[180px]">
+        <div className="flex-1 min-w-[150px] sm:min-w-[180px]">
           <div className="relative">
-            <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               value={filters.search}
               onChange={(e) => handleChange("search", e.target.value)}
-              placeholder="Search by title or notes…"
-              className="input-dark pl-9 text-sm"
+              placeholder="Search…"
+              className="input-dark pl-8 text-xs sm:text-sm py-1.5 sm:py-2"
             />
           </div>
         </div>
 
         {/* Category */}
-        <div className="min-w-[150px]">
+        <div className="min-w-[130px] sm:min-w-[150px]">
           <select
             value={filters.category}
             onChange={(e) => handleChange("category", e.target.value)}
-            className="input-dark text-sm"
+            className="input-dark text-xs sm:text-sm py-1.5 sm:py-2"
           >
             <option value="">All categories</option>
             {CATEGORIES.map((cat) => (
@@ -56,30 +56,30 @@ const FilterBar = ({ filters, onChange }: FilterBarProps) => {
         </div>
 
         {/* Date From */}
-        <div>
+        <div className="min-w-[140px]">
           <input
             type="date"
             value={filters.dateFrom}
             onChange={(e) => handleChange("dateFrom", e.target.value)}
-            className="input-dark text-sm text-gray-500"
+            className="input-dark text-xs sm:text-sm py-1.5 sm:py-2 text-gray-500 w-full"
             title="From date"
           />
         </div>
 
         {/* Date To */}
-        <div>
+        <div className="min-w-[140px]">
           <input
             type="date"
             value={filters.dateTo}
             onChange={(e) => handleChange("dateTo", e.target.value)}
-            className="input-dark text-sm text-gray-500"
+            className="input-dark text-xs sm:text-sm py-1.5 sm:py-2 text-gray-500 w-full"
             title="To date"
           />
         </div>
 
         {hasActive && (
-          <button onClick={clearFilters} className="btn-ghost text-xs px-3 py-2.5 self-end">
-            <X size={13} /> Clear
+          <button onClick={clearFilters} className="btn-ghost text-xs px-2 sm:px-3 py-1.5 sm:py-2.5 self-end flex-shrink-0">
+            <X size={12} /> <span className="hidden sm:inline">Clear</span>
           </button>
         )}
       </div>

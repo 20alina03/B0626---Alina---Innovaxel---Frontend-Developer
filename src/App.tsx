@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Plus, LayoutGrid, List, BarChart2, TrendingUp, TrendingDown, DollarSign } from "lucide-react";
+import { Plus, List, BarChart2, TrendingUp, TrendingDown, DollarSign } from "lucide-react";
 import { useExpenses } from "./hooks/useExpenses";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseTable from "./components/ExpenseTable";
@@ -96,24 +96,23 @@ export default function App() {
       <div aria-hidden className="bg-blobs" />
       {/* Top Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-              <LayoutGrid size={15} className="text-white" strokeWidth={2} />
-            </div>
-            <span className="font-bold text-gray-900 text-lg tracking-tight">SpendSync</span>
+          <div className="flex items-center gap-2.5 min-w-0">
+            <img src="/logo.svg" alt="SpendSync" className="w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0" />
+            <span className="font-bold text-gray-900 text-base sm:text-lg tracking-tight truncate">SpendSync</span>
           </div>
 
           {/* Right */}
-          <button onClick={openAddModal} className="btn-primary">
-            <Plus size={15} strokeWidth={2.5} />
-            Add Expense
+          <button onClick={openAddModal} className="btn-primary text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2.5 flex-shrink-0">
+            <Plus size={13} strokeWidth={2.5} />
+            <span className="hidden sm:inline">Add Expense</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg px-4 py-3 mb-6 text-sm">
             {error}
@@ -121,82 +120,86 @@ export default function App() {
         )}
 
         {/* Stats Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
           {/* Total All Time */}
-          <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
+          <div className="bg-white border border-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-5 shadow-sm">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
               <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Spent</span>
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                <DollarSign size={14} className="text-gray-500" />
+              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <DollarSign size={13} className="text-gray-500" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{formatCurrency(total)}</p>
-            <p className="text-xs text-gray-400 mt-1">{expenses.length} transactions total</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatCurrency(total)}</p>
+            <p className="text-xs text-gray-400 mt-1">{expenses.length} trans.</p>
           </div>
 
           {/* This Month */}
-          <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
+          <div className="bg-white border border-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-5 shadow-sm">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
               <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">This Month</span>
-              <div className="w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center">
-                <BarChart2 size={14} className="text-sky-500" />
+              <div className="w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                <BarChart2 size={13} className="text-sky-500" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{formatCurrency(thisMonth)}</p>
-            <p className="text-xs text-gray-400 mt-1">Current billing period</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatCurrency(thisMonth)}</p>
+            <p className="text-xs text-gray-400 mt-1">This period</p>
           </div>
 
           {/* vs Last Month */}
-          <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">vs Last Month</span>
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${monthDelta >= 0 ? "bg-red-50" : "bg-green-50"}`}>
+          <div className="bg-white border border-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-5 shadow-sm relative overflow-hidden sm:col-span-2 lg:col-span-1">
+            <div
+              className="absolute top-0 left-0 w-full h-1 rounded-t-lg sm:rounded-t-xl"
+              style={{ backgroundColor: monthDelta >= 0 ? "#ef4444" : "#10b981" }}
+            />
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">vs Last</span>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${monthDelta >= 0 ? "bg-red-50" : "bg-green-50"}`}>
                 {monthDelta >= 0
-                  ? <TrendingUp size={14} className="text-red-500" />
-                  : <TrendingDown size={14} className="text-green-500" />
+                  ? <TrendingUp size={13} className="text-red-500" />
+                  : <TrendingDown size={13} className="text-green-500" />
                 }
               </div>
             </div>
-            <p className={`text-2xl font-bold ${monthDelta >= 0 ? "text-red-500" : "text-green-600"}`}>
+            <p className={`text-xl sm:text-2xl font-bold ${monthDelta >= 0 ? "text-red-500" : "text-green-600"}`}>
               {monthDelta >= 0 ? "+" : ""}{formatCurrency(monthDelta)}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Compared to prior month</p>
+            <p className="text-xs text-gray-400 mt-1">Prior month</p>
           </div>
         </div>
 
         {/* Tab Bar */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg w-full sm:w-auto">
             {TABS.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
                 onClick={() => setActiveTab(id)}
-                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all duration-150 cursor-pointer ${
+                className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-all duration-150 cursor-pointer flex-1 sm:flex-none justify-center sm:justify-start ${
                   activeTab === id
                     ? "bg-white text-gray-900 shadow-sm border border-gray-200"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                <Icon size={14} />
+                <Icon size={13} />
                 {label}
               </button>
             ))}
           </div>
 
           {activeTab === "expenses" && (
-            <span className="text-sm text-gray-400">
+            <span className="text-xs sm:text-sm text-gray-400 whitespace-nowrap">
               <span className="font-semibold text-gray-700">{filteredExpenses.length}</span>
-              {" "}of{" "}
+              <span className="hidden sm:inline">{" "}of{" "}</span>
+              <span className="sm:hidden">/</span>
               <span className="font-semibold text-gray-700">{expenses.length}</span>
-              {" "}records
             </span>
           )}
         </div>
 
         {/* Content */}
         {loading ? (
-          <div className="flex items-center justify-center py-32">
-            <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-700 rounded-full animate-spin" />
+          <div className="flex items-center justify-center py-16 sm:py-32">
+            <div className="w-6 sm:w-8 h-6 sm:h-8 border-2 border-gray-300 border-t-gray-700 rounded-full animate-spin" />
           </div>
         ) : (
           <>

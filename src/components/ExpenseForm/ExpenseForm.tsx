@@ -78,23 +78,23 @@ const ExpenseForm = ({
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Title */}
         <div>
-          <label className="form-label">Title</label>
+          <label className="form-label text-xs sm:text-sm">Title</label>
           <input
             name="title"
             value={form.title}
             onChange={handleChange}
             placeholder='e.g., "Dinner with clients"'
-            className="input-dark"
+            className="input-dark text-xs sm:text-sm py-1.5 sm:py-2"
           />
-          {errors.title && <p className="error-text">{errors.title}</p>}
+          {errors.title && <p className="error-text text-xs">{errors.title}</p>}
         </div>
 
         {/* Amount */}
         <div>
-          <label className="form-label">Amount (PKR)</label>
+          <label className="form-label text-xs sm:text-sm">Amount (PKR)</label>
           <input
             name="amount"
             type="number"
@@ -103,65 +103,65 @@ const ExpenseForm = ({
             value={form.amount}
             onChange={handleChange}
             placeholder="0.00"
-            className="input-dark"
+            className="input-dark text-xs sm:text-sm py-1.5 sm:py-2"
           />
-          {errors.amount && <p className="error-text">{errors.amount}</p>}
+          {errors.amount && <p className="error-text text-xs">{errors.amount}</p>}
         </div>
 
         {/* Category & Date */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
-            <label className="form-label">Category</label>
+            <label className="form-label text-xs sm:text-sm">Category</label>
             <select
               name="category"
               value={form.category}
               onChange={handleChange}
-              className="input-dark"
+              className="input-dark text-xs sm:text-sm py-1.5 sm:py-2"
             >
               <option value="">Select…</option>
               {CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
-            {errors.category && <p className="error-text">{errors.category}</p>}
+            {errors.category && <p className="error-text text-xs">{errors.category}</p>}
           </div>
 
           <div>
-            <label className="form-label">Date</label>
+            <label className="form-label text-xs sm:text-sm">Date</label>
             <input
               name="date"
               type="date"
               value={form.date}
               onChange={handleChange}
-              className="input-dark"
+              className="input-dark text-xs sm:text-sm py-1.5 sm:py-2"
             />
-            {errors.date && <p className="error-text">{errors.date}</p>}
+            {errors.date && <p className="error-text text-xs">{errors.date}</p>}
           </div>
         </div>
 
         {/* Notes */}
         <div>
-          <label className="form-label">Notes <span className="normal-case font-normal text-gray-400">(optional)</span></label>
+          <label className="form-label text-xs sm:text-sm">Notes <span className="normal-case font-normal text-gray-400">(optional)</span></label>
           <textarea
             name="notes"
             value={form.notes}
             onChange={handleChange}
             placeholder="Add any context or notes…"
             rows={2}
-            className="input-dark resize-none"
+            className="input-dark resize-none text-xs sm:text-sm py-1.5 sm:py-2"
           />
         </div>
       </div>
 
-      <div className="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-6 pt-3 sm:pt-5 border-t border-gray-100">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-primary flex-1 justify-center disabled:opacity-50"
+          className="btn-primary justify-center disabled:opacity-50 order-2 sm:order-1 text-xs sm:text-sm py-1.5 sm:py-2 sm:flex-1"
         >
           {isSubmitting ? "Saving…" : "Save Expense"}
         </button>
-        <button type="button" onClick={onCancel} className="btn-ghost">
+        <button type="button" onClick={onCancel} className="btn-ghost order-1 sm:order-2 text-xs sm:text-sm py-1.5 sm:py-2">
           Cancel
         </button>
       </div>

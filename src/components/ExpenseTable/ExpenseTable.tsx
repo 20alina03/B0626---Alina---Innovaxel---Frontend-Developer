@@ -41,7 +41,7 @@ interface ExpenseTableProps {
 const ExpenseTable = ({ expenses, onEdit, onDelete }: ExpenseTableProps) => {
   if (expenses.length === 0) {
     return (
-      <div className="bg-white border border-gray-100 rounded-xl text-center py-20 shadow-sm">
+      <div className="bg-white border border-gray-100 rounded-lg sm:rounded-xl text-center py-12 sm:py-20 shadow-sm">
         <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="5" width="20" height="14" rx="2"/>
@@ -59,14 +59,14 @@ const ExpenseTable = ({ expenses, onEdit, onDelete }: ExpenseTableProps) => {
   return (
     <>
       {/* Desktop Table */}
-      <div className="hidden md:block bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm">
+      <div className="hidden md:block bg-white border border-gray-100 rounded-lg sm:rounded-xl overflow-hidden shadow-sm">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-100 bg-gray-50/60">
               {["Date", "Title", "Category", "Amount", "Notes", ""].map((h, i) => (
                 <th
                   key={i}
-                  className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-5 py-3.5"
+                  className="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 sm:px-5 py-2.5 sm:py-3.5"
                 >
                   {h}
                 </th>
@@ -79,34 +79,34 @@ const ExpenseTable = ({ expenses, onEdit, onDelete }: ExpenseTableProps) => {
                 key={expense.id}
                 className="hover:bg-gray-50/70 transition-colors group"
               >
-                <td className="px-5 py-4 text-gray-400 whitespace-nowrap text-xs font-medium">
+                <td className="px-3 sm:px-5 py-3 sm:py-4 text-gray-400 whitespace-nowrap text-xs font-medium">
                   {formatDate(expense.date)}
                 </td>
-                <td className="px-5 py-4 font-semibold text-gray-900 text-sm">
+                <td className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-gray-900 text-xs sm:text-sm truncate">
                   {expense.title}
                 </td>
-                <td className="px-5 py-4">
+                <td className="px-3 sm:px-5 py-3 sm:py-4">
                   <CategoryBadge category={expense.category} />
                 </td>
-                <td className="px-5 py-4 font-bold text-gray-900 text-sm tabular-nums">
+                <td className="px-3 sm:px-5 py-3 sm:py-4 font-bold text-gray-900 text-xs sm:text-sm tabular-nums">
                   {formatCurrency(expense.amount)}
                 </td>
-                <td className="px-5 py-4 text-gray-400 max-w-[160px] truncate text-xs">
+                <td className="px-3 sm:px-5 py-3 sm:py-4 text-gray-400 max-w-[120px] sm:max-w-[160px] truncate text-xs">
                   {expense.notes || <span className="text-gray-200">—</span>}
                 </td>
-                <td className="px-5 py-4">
-                  <div className="flex gap-2 items-center transition-all">
+                <td className="px-3 sm:px-5 py-3 sm:py-4">
+                  <div className="flex gap-1.5 sm:gap-2 items-center transition-all">
                     <button
                       onClick={() => onEdit(expense)}
-                      className="btn-edit"
+                      className="btn-edit text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5"
                     >
-                      <Pencil size={12} /> <span className="ml-1.5">Edit</span>
+                      <Pencil size={11} /> <span className="hidden sm:inline">Edit</span>
                     </button>
                     <button
                       onClick={() => onDelete(expense.id)}
-                      className="btn-danger"
+                      className="btn-danger text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5"
                     >
-                      <Trash2 size={12} /> <span className="ml-1.5">Delete</span>
+                      <Trash2 size={11} /> <span className="hidden sm:inline">Delete</span>
                     </button>
                   </div>
                 </td>
@@ -117,7 +117,7 @@ const ExpenseTable = ({ expenses, onEdit, onDelete }: ExpenseTableProps) => {
       </div>
 
       {/* Mobile Card Grid */}
-      <div className="md:hidden grid grid-cols-1 gap-3">
+      <div className="md:hidden grid grid-cols-1 gap-2 sm:gap-3">
         {expenses.map((expense) => (
           <ExpenseCard
             key={expense.id}

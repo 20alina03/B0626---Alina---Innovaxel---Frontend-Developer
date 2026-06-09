@@ -1,6 +1,7 @@
+import './ExpenseForm.css';
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import { CATEGORIES } from "../utils/formatters";
-import type { Expense, ExpenseFormData } from "../types/types";
+import { CATEGORIES } from "../../utils/formatters";
+import type { Expense, ExpenseFormData } from "../../types/types";
 
 interface FormState {
   title: string;

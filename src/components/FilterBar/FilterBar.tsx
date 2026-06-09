@@ -1,6 +1,7 @@
+import './FilterBar.css';
 import { Search, X, SlidersHorizontal } from "lucide-react";
-import { CATEGORIES } from "../utils/formatters";
-import type { Filters } from "../types/types";
+import { CATEGORIES } from "../../utils/formatters";
+import type { Filters } from "../../types/types";
 
 interface FilterBarProps {
   filters: Filters;

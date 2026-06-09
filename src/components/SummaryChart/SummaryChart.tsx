@@ -1,3 +1,4 @@
+import './SummaryChart.css';
 import {
   PieChart,
   Pie,
@@ -14,8 +15,8 @@ import {
   formatCurrency,
   groupByCategory,
   CATEGORY_COLORS,
-} from "../utils/formatters";
-import type { Expense } from "../types/types";
+} from "../../utils/formatters";
+import type { Expense } from "../../types/types";
 
 interface ChartDataItem {
   name: string;

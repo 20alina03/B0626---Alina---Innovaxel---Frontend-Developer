@@ -1,11 +1,12 @@
+import './ExpenseTable.css';
 import { Pencil, Trash2 } from "lucide-react";
 import {
   formatCurrency,
   formatDate,
   CATEGORY_COLORS,
-} from "../utils/formatters";
-import ExpenseCard from "./ExpenseCard";
-import type { Expense } from "../types/types";
+} from "../../utils/formatters";
+import ExpenseCard from "../ExpenseCard";
+import type { Expense } from "../../types/types";
 
 interface CategoryBadgeProps {
   category: string;

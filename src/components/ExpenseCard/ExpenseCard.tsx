@@ -1,6 +1,7 @@
+import './ExpenseCard.css';
 import { Pencil, Trash2 } from "lucide-react";
-import { formatCurrency, formatDate, CATEGORY_COLORS } from "../utils/formatters";
-import type { Expense } from "../types/types";
+import { formatCurrency, formatDate, CATEGORY_COLORS } from "../../utils/formatters";
+import type { Expense } from "../../types/types";
 
 interface ExpenseCardProps {
   expense: Expense;
